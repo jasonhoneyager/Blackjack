@@ -80,7 +80,7 @@ class Round:
         dealer = Dealer()
         dealerTotal = dealer.playDealerHand(p1hand, dealerhand, holeCard, self.play1, deck, house)
         results = Results()
-        outcome = results.determineWinner(self.play1, dealerTotal, name)
+        outcome = results.determineWinner(p1hand, dealerhand, self.play1, dealerTotal, name)
         return outcome * 2
 
     def surrender(self, p1hand, dealerhand, deck, house, holeCard, name):

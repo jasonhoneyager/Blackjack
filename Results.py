@@ -12,7 +12,7 @@ class Results:
             outcome = self.dealerBlackjack()
             return outcome
         elif len(p1hand.hand) == 2 and handTotal == 21:
-            outcome = self.playerBlackjack()
+            outcome = self.playerBlackjack(name)
             return outcome
         elif dealerTotal > 21:
             print("Dealer Busts.",name,"Wins!")
