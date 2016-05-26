@@ -1,7 +1,7 @@
 class Scoreboard:
 
-    def __init__(self):
-        self.pot = 0
+    def __init__(self, game):
+        self.game = game
 
     def placeBet(self, cash):
         int(cash)
@@ -14,13 +14,11 @@ class Scoreboard:
             if wager > cash:
                 print("Bet cannot exceed available funds.")
             if wager <= cash:
-                self.pot = self.pot + wager
-                print("Bet Accepted.  Funds $", cash - wager, "   Bet $", self.pot)
+                print("Bet Accepted.  Funds $", cash - wager, "   Bet $", wager)
                 return wager
         if cash <= 0:
             print("You are out of funds.")
-            wager = True
-            return wager
+            self.game.newGame = True
 
     def updateCash(self, outcome, cash, wager):
         int(cash)

@@ -35,10 +35,9 @@ class Game:
                 if len(deck.currentDeck) <= 10:
                     house = deck.newDeck()
                 round = Round()
-                score = Scoreboard()
+                score = Scoreboard(self)
                 wager = score.placeBet(self.player.cash)
-                if wager == True:
-                    self.newGame = True
+                if self.newGame == True:
                     break
                 round.startingHands(self.player, dealer, deck, house)
                 outcome = round.takeAction(self.player, dealer, deck, house)
