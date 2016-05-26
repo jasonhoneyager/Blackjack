@@ -3,6 +3,7 @@ class Player:
     def __init__(self):
         self.name = None
         self.cash = 0
+        self.hand = []
 
     def obtainName(self):
         nameInput = input("Please enter your name: ")
@@ -10,3 +11,6 @@ class Player:
 
     def startingCash(self):
         self.cash = self.cash + 1000
+
+    def buildHand(self, drawCard):
+        self.hand.append(drawCard)

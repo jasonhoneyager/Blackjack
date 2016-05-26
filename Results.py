@@ -3,23 +3,23 @@ class Results:
     def __init__(self):
         return
 
-    def determineWinner(self, p1hand, dealerhand, handTotal, dealerTotal, name):
-        if len(p1hand.hand) == 2 and len(dealerhand.hand) == 2 and handTotal == dealerTotal:
+    def determineWinner(self, player, dealer, handTotal, dealerTotal):
+        if len(player.hand) == 2 and len(dealer.hand) == 2 and handTotal == dealerTotal:
             print("Push.  No Winner.")
             outcome = 0
             return outcome
-        elif len(dealerhand.hand) == 2 and dealerTotal == 21:
+        elif len(dealer.hand) == 2 and dealerTotal == 21:
             outcome = self.dealerBlackjack()
             return outcome
-        elif len(p1hand.hand) == 2 and handTotal == 21:
-            outcome = self.playerBlackjack(name)
+        elif len(player.hand) == 2 and handTotal == 21:
+            outcome = self.playerBlackjack(player)
             return outcome
         elif dealerTotal > 21:
-            print("Dealer Busts.",name,"Wins!")
+            print("Dealer Busts.",player.name,"Wins!")
             outcome = 1
             return outcome
         elif handTotal > dealerTotal:
-            print(name,"Wins!")
+            print(player.name,"Wins!")
             outcome = 1
             return outcome
         elif dealerTotal > handTotal:
@@ -31,8 +31,8 @@ class Results:
             outcome = 0
             return outcome
 
-    def playerBlackjack(self, name):
-        print("Blackjack!",name,"Wins!")
+    def playerBlackjack(self, player):
+        print("Blackjack!",player.name,"Wins!")
         outcome = 1.5
         return outcome
 
@@ -41,12 +41,12 @@ class Results:
         outcome = -1
         return outcome
 
-    def playerBusts(self, name):
-        print(name, "Busts.  House Wins!")
+    def playerBusts(self, player):
+        print(player.name, "Busts.  House Wins!")
         outcome = -1
         return outcome
 
-    def playerSurrender(self, p1hand, dealerhand, deck, house, holeCard, name):
-        print(name, "Surrenders Hand.")
+    def playerSurrender(self, player, dealer, deck, house):
+        print(player.name, "Surrenders Hand.")
         outcome = -0.5
         return outcome

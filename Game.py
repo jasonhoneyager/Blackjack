@@ -1,8 +1,7 @@
 from Player import Player
+from Dealer import Dealer
 from Deck import Deck
 from Scoreboard import Scoreboard
-from PlayerHand import PlayerHand
-from DealerHand import DealerHand
 from Round import Round
 from KeepPlaying import KeepPlaying
 
@@ -31,8 +30,7 @@ class Game:
             self.player.startingCash()
             print(self.player.name, "has $",self.player.cash,"available")
             deck = Deck()
-            p1hand = PlayerHand()
-            dealerhand = DealerHand()
+            dealer = Dealer()
             while self.replayGame != False:
                 if len(deck.currentDeck) <= 10:
                     house = deck.newDeck()
@@ -42,8 +40,8 @@ class Game:
                 if wager == True:
                     self.newGame = True
                     break
-                holeCard = round.startingHands(p1hand, dealerhand, deck, house)
-                outcome = round.takeAction(p1hand, dealerhand, deck, house, holeCard, self.player.name)
+                round.startingHands(self.player, dealer, deck, house)
+                outcome = round.takeAction(self.player, dealer, deck, house)
                 self.player.cash = score.updateCash(outcome, self.player.cash, wager)
                 print(self.player.name, "has $", self.player.cash, "available")
                 replay = KeepPlaying()
