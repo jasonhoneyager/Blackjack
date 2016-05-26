@@ -45,7 +45,7 @@ class Game:
                 self.player.cash = score.updateCash(outcome, self.player.cash, wager)
                 print(self.player.name, "has $", self.player.cash, "available")
                 replay = KeepPlaying()
-                replay.replayGame()
+                replay.replayGame(self.player, dealer)
                 self.replayGame = replay.playAgain
             if self.newGame == False:
                 print("I don't need you.  I'll build my own casino.  With Blackjack... and hookers... Awww, forget it.")

@@ -4,6 +4,7 @@ class Player:
         self.name = None
         self.cash = 0
         self.hand = []
+        self.score = 0
 
     def obtainName(self):
         nameInput = input("Please enter your name: ")

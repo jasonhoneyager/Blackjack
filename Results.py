@@ -3,30 +3,30 @@ class Results:
     def __init__(self):
         return
 
-    def determineWinner(self, player, dealer, handTotal, dealerTotal):
-        if len(player.hand) == 2 and len(dealer.hand) == 2 and handTotal == dealerTotal:
+    def determineWinner(self, player, dealer):
+        if len(player.hand) == 2 and len(dealer.hand) == 2 and player.score == dealer.score:
             print("Push.  No Winner.")
             outcome = 0
             return outcome
-        elif len(dealer.hand) == 2 and dealerTotal == 21:
+        elif len(dealer.hand) == 2 and dealer.score == 21:
             outcome = self.dealerBlackjack()
             return outcome
-        elif len(player.hand) == 2 and handTotal == 21:
+        elif len(player.hand) == 2 and player.score == 21:
             outcome = self.playerBlackjack(player)
             return outcome
-        elif dealerTotal > 21:
+        elif dealer.score > 21:
             print("Dealer Busts.",player.name,"Wins!")
             outcome = 1
             return outcome
-        elif handTotal > dealerTotal:
+        elif player.score > dealer.score:
             print(player.name,"Wins!")
             outcome = 1
             return outcome
-        elif dealerTotal > handTotal:
+        elif dealer.score > player.score:
             print("House Wins!")
             outcome = -1
             return outcome
-        elif handTotal == dealerTotal:
+        elif player.score == dealer.score:
             print("Push.  No Winner.")
             outcome = 0
             return outcome

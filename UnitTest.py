@@ -7,7 +7,6 @@ from Dealer import Dealer
 from Card import Card
 from Deck import Deck
 from Scoreboard import Scoreboard
-from PlayerHand import PlayerHand
 from DealCard import DealCard
 from Results import Results
 from KeepPlaying import KeepPlaying
@@ -40,78 +39,51 @@ class UnitTest(unittest.TestCase):
 #Results Tests####################
     def test_determine_winner_win(self):
         results = Results()
-        p1hand = None
-        dealerhand = None
-        handTotal = 20
-        dealerTotal = 18
-        name = "Rick"
-        results.determineWinner(p1hand, dealerhand, handTotal, dealerTotal, name)
+        player =
+        dealer =
+        results.determineWinner(player, dealer)
         self.assertEqual(outcome, 1)
 
     def test_determine_winner_lose(self):
         results = Results()
-        p1hand = None
-        dealerhand = None
-        handTotal = 16
-        dealerTotal = 20
-        name = "Rick"
-        results.determineWinner(p1hand, dealerhand, handTotal, dealerTotal, name)
+        player =
+        dealer =
+        results.determineWinner(player, dealer)
         self.assertEqual(outcome, -1)
 
     def test_determine_winner_push(self):
         results = Results()
-        p1hand = None
-        dealerhand = None
-        handTotal = 20
-        dealerTotal = 20
-        name = "Rick"
-        results.determineWinner(p1hand, dealerhand, handTotal, dealerTotal, name)
+        player =
+        dealer =
+        results.determineWinner(player, dealer)
         self.assertEqual(outcome, 0)
 
     def test_determine_winner_blackjack_win(self):
         results = Results()
-        p1hand = PlayerHand()
-        self.p1hand.hand = [1,2]
-        dealerhand = Dealer()
-        self.dealerhand.hand = [1,2]
-        handTotal = 21
-        dealerTotal = 19
-        name = "Rick"
-        results.determineWinner(p1hand, dealerhand, handTotal, dealerTotal, name)
+        player =
+        dealer =
+        results.determineWinner(player, dealer)
         self.assertEqual(outcome, 1.5)
 
     def test_determine_winner_blackjack_lose(self):
         results = Results()
-        p1hand = PlayerHand()
-        self.p1hand.hand = [1,2]
-        dealerhand = Dealer()
-        self.dealerhand.hand = [1,2]
-        handTotal = 18
-        dealerTotal = 21
-        name = "Rick"
-        results.determineWinner(p1hand, dealerhand, handTotal, dealerTotal, name)
+        player =
+        dealer =
+        results.determineWinner(player, dealer)
         self.assertEqual(outcome, -1)
 
     def test_determine_winner_blackjack_push(self):
         results = Results()
-        p1hand = PlayerHand()
-
-        dealerhand = Dealer()
-
-        handTotal = 21
-        dealerTotal = 21
-        name = "Rick"
-        results.determineWinner(p1hand, dealerhand, handTotal, dealerTotal, name)
+        player =
+        dealer =
+        results.determineWinner(player, dealer)
         self.assertEqual(outcome, 0)
 
     def test_determine_winner_dealer_bust(self):
         results = Results()
-        p1hand = None
-        dealerhand = None
-        handTotal = 15
-        dealerTotal = 23
-        name = "Rick"
-        results.determineWinner(p1hand, dealerhand, handTotal, dealerTotal, name)
+        player =
+        dealer =
+        results.determineWinner(player, dealer)
         self.assertEqual(outcome, 1)
 #KeepPlaying Tests################
 
