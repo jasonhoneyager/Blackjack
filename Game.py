@@ -49,4 +49,5 @@ class Game:
             if self.newGame == False:
                 print("I don't need you.  I'll build my own casino.  With Blackjack... and hookers... Awww, forget it.")
             elif self.newGame == True:
-                print("Come back when you have some money to lose.")
+                print("Oops, you're broke! ¯\_(ツ)_/¯")
+                print("Come back when you have some money to lose. (\/)(;,,;)(\/)")

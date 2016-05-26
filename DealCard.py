@@ -1,4 +1,3 @@
-import random
 from Card import Card
 class DealCard:
 

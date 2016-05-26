@@ -1,4 +1,3 @@
-#from Deck import Deck
 class Card:
 
     def __init__(self):
