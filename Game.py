@@ -3,6 +3,7 @@ from Dealer import Dealer
 from Deck import Deck
 from Scoreboard import Scoreboard
 from Round import Round
+from Results import Results
 from KeepPlaying import KeepPlaying
 
 class Game:
@@ -11,6 +12,7 @@ class Game:
         self.player = None
         self.replayGame = None
         self.newGame = None
+        self.outcome = 1
 
     def getPlayers(self):
         self.player = Player()
@@ -34,14 +36,18 @@ class Game:
             while self.replayGame != False:
                 if len(deck.currentDeck) <= 10:
                     house = deck.newDeck()
-                round = Round()
+                round = Round(self)
+                results = Results(self)
                 score = Scoreboard(self)
                 wager = score.placeBet(self.player.cash)
                 if self.newGame == True:
                     break
                 round.startingHands(self.player, dealer, deck, house)
-                outcome = round.takeAction(self.player, dealer, deck, house)
-                self.player.cash = score.updateCash(outcome, self.player.cash, wager)
+                round.takeAction(self.player, dealer, deck, house)
+                if self.player.score <= 21 and self.player.score > 0:
+                    round.checkDealerHand(self.player, dealer, deck, house)
+                results.determineWinner(self.player, dealer)
+                self.player.cash = score.updateCash(self.player.cash, wager)
                 print(self.player.name, "has $", self.player.cash, "available")
                 replay = KeepPlaying()
                 replay.replayGame(self.player, dealer)

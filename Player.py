@@ -15,3 +15,6 @@ class Player:
 
     def buildHand(self, drawCard):
         self.hand.append(drawCard)
+
+    def splitHand(self, player, deck, house):
+        return

@@ -1,8 +1,7 @@
-from Results import Results
 class Round:
 
-    def __init__(self):
-        return
+    def __init__(self, game):
+        self.game = game
 
     def startingHands(self, player, dealer, deck, house):
         player.hand = []
@@ -33,20 +32,16 @@ class Round:
                         print("Your Hand:", player.hand, "Total: ", player.score)
                         print("Dealer Hand:", dealer.hand, "Total: ", dealer.hand[0][2])
                         continue
-                    results = Results()
-                    outcome = results.playerBusts(player)
-                    return outcome
             elif action.lower() == "s":
-                outcome = self.stand(player, dealer, deck, house)
-                return outcome
+                return
             elif action.lower() == "p" and len(player.hand) == 2 and player.hand[0][2] == player.hand[1][2]:
                 self.split(player, deck, house)
             elif action.lower() == "d":
-                outcome = self.double(player, dealer, deck, house)
-                return outcome
+                self.double(player, deck, house)
+                return
             elif action.lower() == "q":
-                outcome = self.surrender(player, dealer, deck, house)
-                return outcome
+                self.surrender(player)
+                return
             else:
                 print("Please enter a valid action")
 
@@ -57,32 +52,22 @@ class Round:
         print("Your Hand:", player.hand, "Total: ", player.score)
 
     def stand(self, player, dealer, deck, house):
-        dealerTotal = dealer.playDealerHand(player, dealer, deck, house)
-        results = Results()
-        outcome = results.determineWinner(player, dealer)
-        return outcome
+        return
 
     def split(self, player, deck, house):
         print("Not supported at this time")
 
-    def double(self, player, dealer, deck, house):
+    def double(self, player, deck, house):
         drawCard = deck.dealCard(house)
         player.buildHand(drawCard)
         player.score = player.score + drawCard[2]
         print("Your Hand:", player.hand, "Total: ", player.score)
         if player.score > 21:
-            results = Results()
-            outcome = results.playerBusts(player)
-            return outcome * 2
-        dealerTotal = dealer.playDealerHand(player, dealer, deck, house)
-        results = Results()
-        outcome = results.determineWinner(player, dealer)
-        return outcome * 2
+            self.checkForAces(player)
+        self.game.outcome = 2
 
-    def surrender(self, player, dealer, deck, house):
-        results = Results()
-        outcome = results.playerSurrender(player, dealer, deck, house)
-        return outcome
+    def surrender(self, player):
+        player.score = -1
 
     def checkForAces(self, player):
         for cards in player.hand:
@@ -90,3 +75,6 @@ class Round:
                 cards[2] = 1
                 player.score = player.score - 10
                 return
+
+    def checkDealerHand(self, player, dealer, deck, house):
+        dealer.playDealerHand(player, dealer, deck, house)

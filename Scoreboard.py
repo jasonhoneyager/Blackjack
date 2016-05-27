@@ -20,7 +20,8 @@ class Scoreboard:
             print("You are out of funds.")
             self.game.newGame = True
 
-    def updateCash(self, outcome, cash, wager):
+    def updateCash(self, cash, wager):
         int(cash)
-        cash = cash + wager * outcome
+        cash = cash + wager * self.game.outcome
+        self.game.outcome = 1
         return cash

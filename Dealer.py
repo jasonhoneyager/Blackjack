@@ -11,8 +11,7 @@ class Dealer:
         print("Your Hand:", player.hand, "Total: ", player.score)
         print("Dealer Hand:", self.hand, "Total: ", self.score)
         if len(player.hand) == 2 and player.score == 21 and self.score != 21:
-            dealerTotal = self.score
-            return dealerTotal
+            return
         while self.score <= 16:
             drawCard = deck.dealCard(house)
             self.buildHand(drawCard)
@@ -22,8 +21,6 @@ class Dealer:
             if self.score > 21:
                 self.checkForAces(player)
                 continue
-        dealerTotal = self.score
-        return dealerTotal
 
     def checkForAces(self, player):
         for cards in self.hand:
